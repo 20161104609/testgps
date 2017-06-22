@@ -11,29 +11,33 @@
 int main(int argc, const char * argv[]) {
     // insert code here...
     
-    FILE *fp1,*fp2;
+    FILE *fp1;
     fp1=fopen("//Users//a20161104609//Desktop//testgps//GPS170510.log","r");
-    fp2=fopen("//Users//a20161104609//Desktop//testgps//writegps.txt","w+");
-    char   time[10],gps,latidute1,longitude1,year[10],s[5];
-    double latitude,longitude,v,course;
-    if(fp1==NULL)
-    {
-        printf("您所输入文件不存在");
-               return 0;
-    }
-    else {
-        fscanf(fp2,"$GPRMC,%6s,%c,%lf,%c,%lf,%lf,%6s,,%s",time,&gps,&latitude,&latitude1,&longitude,&longitde1,&v,&course,year,s);
-        if(gps=='A')
-        {
-            printf("20%c%c年%c%c月%c%c日%c%c时%c%c分%c%c秒\n",year[0],year[1],year[2],year[3],year[4],year[5],time[0],time[1],time[2],time[3],time[4],time[5]);
-        }
-        
- 
-        
-       
-       
-        fclose(fp1);
-        }
+    //fp2=fopen("//Users//a20161104609//Desktop//testgps//writegps.txt","w+");
+    char str1[70];
+    char str2[70];
+    char lat[9],time[7],date[7],longtitude[10];
+    int i;
+    fscanf(fp1,"%s%s",str1,str2);
+    printf("结果：%s%s\n",str1,str2);
+    for(i=0;i<8;i++)
+        lat[i]=str1[i+16];
+    lat[8]='\0';
+    printf("weidu:%s\n",lat);
+    for(i=0;i<7;i++)
+        time[i]=str1[i+7];
+    time[6]='\0';
+    printf("shijian:%s\n",time);
+    for(i=0;i<7;i++)
+          date[i]=str1[i+51];
+    date[6]='\0';
+    printf("riqi:%s\n",date);
+    for(i=0;i<10;i++)
+        longtitude[i]=str1[i+27];
+    longtitude[9]='\0';
+    printf("jingdu:%s\n",longtitude);
+    fclose(fp1);
+    
     
     return 0;
 }
